@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Banner from './components/banner';
 import './App.css';
 
 const schedule = {
@@ -9,7 +10,7 @@ const App = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <h1>{schedule.title}</h1>
+    <Banner title={schedule.title} />
   );
 };
 
