@@ -40,3 +40,8 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
