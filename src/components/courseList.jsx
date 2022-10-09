@@ -1,7 +1,7 @@
 import './CourseList.css'
 import CourseEntry from './courseEntry'
 
-const CourseList = ({courses}) => {
+const CourseList = ({courses, selected, toggleSelected}) => {
   return (
     <ul className='course-list p-0'>
       {
@@ -11,6 +11,8 @@ const CourseList = ({courses}) => {
           number={course.number} 
           meets={course.meets} 
           title={course.title} 
+          active={selected.some(e => e == id)}
+          onClick={()=>toggleSelected(id)}
         />)
       }
     </ul>
