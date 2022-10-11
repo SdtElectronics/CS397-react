@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import CourseList from './CourseList';
+import ModalSelected from './modalSelected';
 
 const terms = {
   Fall: "Fall",
@@ -25,7 +26,16 @@ const TermSelector = ({selection, setSelection}) => (
   </div>
 );
 
-const Course = ({courseList, selection}) => {
+const Course = ({courseList, selection, toggleSelected}) => {
+  return (<CourseList courses={Object.fromEntries(courseList)}
+                      selected={selection}
+                      toggleSelected={toggleSelected} />);
+};
+
+const TermPage = ({courses}) => {
+  const [term, setTerm] = useState('Fall');
+  const [openSelected, setOpenSelected] = useState(false);
+
   const [selected, setSelected] = useState([]);
 
   const toggleSelected = item => setSelected(
@@ -34,20 +44,22 @@ const Course = ({courseList, selection}) => {
     : [...selected, item]
   );
 
-  const filtered = Object.entries(courseList).filter(e => e[1].term === selection);
-  
-  return (<CourseList courses={Object.fromEntries(filtered)}
-                      selected={selected}
-                      toggleSelected={toggleSelected} />);
-};
+  const filtered = Object.entries(courses).filter(e => e[1].term === term);
+  const selectedObjs = Object.entries(courses).filter(e => selected.includes(e[0]));
 
-const TermPage = ({courses}) => {
-  const [term, setTerm] = useState('Fall');
+  const openSelectedModal = () => setOpenSelected(true);
+  const closeSelectedModal = () => setOpenSelected(false);
 
   return (
     <div>
-      <TermSelector selection={term} setSelection={setTerm} />
-      <Course courseList={courses} selection={term}/>
+      <div className="d-flex">
+        <TermSelector selection={term} setSelection={setTerm} />
+        <button type="button" className="ms-auto btn btn-success m-1 p-2" onClick={openSelectedModal}>
+          course plan
+        </button>
+      </div>
+      <Course courseList={filtered} selection={selected} toggleSelected={toggleSelected}/>
+      <ModalSelected selection={selectedObjs} open={openSelected} close={closeSelectedModal}/>
     </div>
   );
 }
