@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Banner from './banner';
 import CourseList from './CourseList';
 import ModalSelected from './modalSelected';
 
@@ -32,7 +33,7 @@ const Course = ({courseList, selection, toggleSelected}) => {
                       toggleSelected={toggleSelected} />);
 };
 
-const TermPage = ({courses}) => {
+const TermPage = ({title, courses}) => {
   const [term, setTerm] = useState('Fall');
   const [openSelected, setOpenSelected] = useState(false);
 
@@ -52,6 +53,7 @@ const TermPage = ({courses}) => {
 
   return (
     <div>
+      <Banner title={title} />
       <div className="d-flex">
         <TermSelector selection={term} setSelection={setTerm} />
         <button type="button" className="ms-auto btn btn-success m-1 p-2" onClick={openSelectedModal}>
