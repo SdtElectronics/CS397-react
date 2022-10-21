@@ -8,6 +8,7 @@ const CourseList = ({courses, selected, toggleSelected}) => {
       {
         Object.entries(courses).map(([id, course]) => <CourseEntry 
           key={id}
+          cid={id}
           term={course.term} 
           number={course.number} 
           meets={course.meets} 
