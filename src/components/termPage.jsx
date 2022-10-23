@@ -1,3 +1,4 @@
+import { signInWithGoogle, signOut, useAuthState } from "../utilities/firebase";
 import { useState } from "react";
 
 import Banner from './banner';
@@ -28,9 +29,13 @@ const TermSelector = ({selection, setSelection}) => (
 );
 
 const Course = ({courseList, selection, toggleSelected}) => {
+  const [user] = useAuthState();
+	const isAuthenticated = user !== null;
+
   return (<CourseList courses={Object.fromEntries(courseList)}
                       selected={selection}
-                      toggleSelected={toggleSelected} />);
+                      toggleSelected={toggleSelected}
+                      editable={isAuthenticated} />);
 };
 
 const TermPage = ({title, courses}) => {
@@ -59,6 +64,8 @@ const TermPage = ({title, courses}) => {
         <button type="button" className="ms-auto btn btn-success m-1 p-2" onClick={openSelectedModal}>
           course plan
         </button>
+        <button type="button" className="btn btn-success m-1 p-2" onClick={() => signInWithGoogle()}>Sign In</button>
+				<button type="button" className="btn btn-danger m-1 p-2" onClick={() => signOut()}>Sign Out</button>
       </div>
       <Course courseList={filtered} selection={selected} toggleSelected={toggleSelected}/>
       <ModalSelected selection={selectedObjs} open={openSelected} close={closeSelectedModal}/>

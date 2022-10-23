@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const courseEntry = ({cid, term, number, meets, title, active, disabled, onClick}) => {
+const courseEntry = ({cid, term, number, meets, title, active, disabled, editable, onClick}) => {
   if(active) disabled = false;
   return (
     <li className={`card m-1 p-2 border border-2 ${active ? 'border-success' : ''} ${disabled ? 'bg-secondary' : ''}`} 
@@ -12,9 +12,13 @@ const courseEntry = ({cid, term, number, meets, title, active, disabled, onClick
       <hr className="m-2" />
       <div className="px-3 pb-3">
         <p>{meets}</p>
-        <Link to={`/edit/${cid}`} >
-          <button type="button" className="btn btn-outline-dark me-2">Edit</button>
-        </Link>
+        {
+          editable ? 
+          <Link to={`/edit/${cid}`} >
+            <button type="button" className="btn btn-outline-dark me-2">Edit</button>
+          </Link> :
+          <button type="button" className="btn btn-outline-dark me-2" disabled={true}>Edit</button>
+        }
       </div>
       
     </li>

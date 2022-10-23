@@ -2,7 +2,7 @@ import './CourseList.css'
 import CourseEntry from './courseEntry'
 import { isMeetConflict } from '../utilities/validateTime';
 
-const CourseList = ({courses, selected, toggleSelected}) => {
+const CourseList = ({courses, selected, toggleSelected, editable}) => {
   return (
     <ul className='course-list p-0'>
       {
@@ -22,6 +22,7 @@ const CourseList = ({courses, selected, toggleSelected}) => {
               isMeetConflict(courses[e].meets, course.meets)
             )
           }
+          editable={editable}
           onClick={()=>toggleSelected(id)}
         />)
       }
