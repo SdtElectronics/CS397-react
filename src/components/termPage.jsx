@@ -28,17 +28,17 @@ const TermSelector = ({selection, setSelection}) => (
   </div>
 );
 
-const Course = ({courseList, selection, toggleSelected}) => {
+const Course = ({courseList, selection, toggleSelected, profile}) => {
   const [user] = useAuthState();
 	const isAuthenticated = user !== null;
 
   return (<CourseList courses={Object.fromEntries(courseList)}
                       selected={selection}
                       toggleSelected={toggleSelected}
-                      editable={isAuthenticated} />);
+                      editable={profile?.isAdmin} />);
 };
 
-const TermPage = ({title, courses}) => {
+const TermPage = ({title, courses, profile}) => {
   const [term, setTerm] = useState('Fall');
   const [openSelected, setOpenSelected] = useState(false);
 
@@ -67,7 +67,7 @@ const TermPage = ({title, courses}) => {
         <button type="button" className="btn btn-success m-1 p-2" onClick={() => signInWithGoogle()}>Sign In</button>
 				<button type="button" className="btn btn-danger m-1 p-2" onClick={() => signOut()}>Sign Out</button>
       </div>
-      <Course courseList={filtered} selection={selected} toggleSelected={toggleSelected}/>
+      <Course courseList={filtered} selection={selected} toggleSelected={toggleSelected} profile={profile}/>
       <ModalSelected selection={selectedObjs} open={openSelected} close={closeSelectedModal}/>
     </div>
   );

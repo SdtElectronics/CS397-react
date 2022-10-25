@@ -13,11 +13,10 @@ const courseEntry = ({cid, term, number, meets, title, active, disabled, editabl
       <div className="px-3 pb-3">
         <p>{meets}</p>
         {
-          editable ? 
+          editable &&
           <Link to={`/edit/${cid}`} >
             <button type="button" className="btn btn-outline-dark me-2">Edit</button>
-          </Link> :
-          <button type="button" className="btn btn-outline-dark me-2" disabled={true}>Edit</button>
+          </Link>
         }
       </div>
       
