@@ -15,4 +15,10 @@ describe ('Test App', () => {
       cy.get('[data-cy=Winter]').click();
       cy.get('[data-cy=course]').should('contain' ,'Winter');
     });
+
+    it('uese test data', () => {
+      cy.visit ('/');
+      cy.get('[data-cy=Fall]').click();
+      cy.get('.course-list li:first h4').should('contain' ,'Test');
+    });
 });
