@@ -7,7 +7,10 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest",
-	"cy:open": "cypress open --e2e"
+	"cy:open": "cypress open --e2e",
+	"em:start": "firebase emulators:start --import=./saved-data --export-on-exit",
+	"em:exec": "VITE_EMULATE=true firebase emulators:exec --import=./saved-data 'npm start'",
+	"em:execui": "firebase emulators:exec --ui --import=./saved-data 'npm start'"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.10.1",
